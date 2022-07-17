@@ -2,7 +2,7 @@
 	<mat-card-title>Plataforma</mat-card-title>
 	<mat-card-content>
 		<ngx-charts-pie-chart
-			*ngIf="this.totalGames"
+			*ngIf="this.totalRecords"
 			fxFlex="100"
 			[scheme]="this.colorScheme"
 			[results]="this.dataChartByPlatform"
@@ -13,7 +13,7 @@
 			[doughnut]="isDoughnut"
 		>
 		<ng-template #tooltipTemplate let-model="model">
-			{{model.name}} - {{model.value / this.totalGames | percent}}
+			{{model.name}} - {{model.value / this.totalRecords | percent:'1.1-1':'en-US'}}
 		</ng-template>
 		</ngx-charts-pie-chart>
 	</mat-card-content>

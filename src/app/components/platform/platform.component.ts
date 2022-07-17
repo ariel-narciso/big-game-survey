@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Color, LegendPosition, ScaleType } from '@swimlane/ngx-charts';
 import { DataChart } from 'src/app/models/data-chart.model';
-import { GameService } from 'src/app/services/game.service';
+import { RecordPageableService } from 'src/app/services/record-pageable.service';
 
 @Component({
   selector: 'app-platform',
@@ -11,7 +11,7 @@ import { GameService } from 'src/app/services/game.service';
 export class PlatformComponent implements OnInit {
 
   dataChartByPlatform: DataChart = [];
-  totalGames: number = 0;
+  totalRecords: number = 0;
 
   // options
   gradient: boolean = true;
@@ -27,13 +27,14 @@ export class PlatformComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  constructor(private gameService: GameService) {
-    this.gameService.read().subscribe(games => {
-      this.totalGames = games.length;
+  constructor(private recordPageableService: RecordPageableService) {
+    this.recordPageableService.read().subscribe(data => {
+      const records = data.content;
+      this.totalRecords = data.totalElements;
       let mp = new Map<string, number>();
-      for (let game of games) {
-        const key = game.platform
-        mp.set(game.platform, mp.has(key) ? mp.get(key) as number + 1 : 1);
+      for (let record of records) {
+        const key = record.gamePlatform;
+        mp.set(key, (mp.get(key) || 0) + 1);
       }
       mp.forEach((value, name) => {
         this.dataChartByPlatform.push({name, value});
