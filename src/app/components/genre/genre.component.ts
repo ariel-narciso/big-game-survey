@@ -44,7 +44,6 @@ export class GenreComponent {
         mp.forEach((value, name) => {
           this.dataCharByGenre.push({name, value});
         })
-        console.log(this.dataCharByGenre);
       }
     )
   }
