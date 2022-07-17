@@ -11,6 +11,7 @@ import { RecordPageableService } from 'src/app/services/record-pageable.service'
 export class MostVotedComponent {
 
   dataChartMostVoted: DataChart = [];
+  dataChartLenght: number = 8;
 
   // view: any[] = [700, 200];
 
@@ -38,11 +39,7 @@ export class MostVotedComponent {
         let mp = new Map<string, number>();
         for (let record of records) {
           const key = `${record.gameTitle} | ${record.gamePlatform}`;
-          if (mp.has(key)) {
-            mp.set(key, mp.get(key) as number + 1);
-          } else {
-            mp.set(key, 1);
-          }
+          mp.set(key, (mp.get(key) || 0) + 1);
         }
         let ans: DataChart = [];
         mp.forEach((value, name) => {
@@ -54,8 +51,7 @@ export class MostVotedComponent {
           }
           return 1;
         });
-        this.dataChartMostVoted = ans.splice(0, 8);
-        // console.log(this.dataChartMostVoted);
+        this.dataChartMostVoted = ans.splice(0, this.dataChartLenght);
       }
     )
   }

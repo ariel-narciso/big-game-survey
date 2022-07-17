@@ -35,11 +35,7 @@ export class GenreComponent {
         let mp = new Map<string,number>();
         for (let record of records) {
           const key = record.genreName;
-          if (mp.has(key)) {
-            mp.set(key, mp.get(key) as number + 1);
-          } else {
-            mp.set(key, 1);
-          }
+          mp.set(key, (mp.get(key) || 0) + 1)
         }
         mp.forEach((value, name) => {
           this.dataCharByGenre.push({name, value});
