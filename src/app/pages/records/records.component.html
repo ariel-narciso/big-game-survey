@@ -1,0 +1,63 @@
+<app-button-navigate [data]="this.buttonData"></app-button-navigate>
+<br>
+<div fxLayout="row" fxLayoutAlign="center">
+  <table
+    fxFlex="81.5"
+    class="mat-elevation-z8"
+    mat-table [dataSource]="dataSource"
+    aria-label="Elements"
+  >
+    <!-- Moment Column -->
+    <ng-container matColumnDef="moment">
+      <th mat-header-cell *matHeaderCellDef>INSTANTE</th>
+      <td mat-cell *matCellDef="let row">{{row.moment | date:'dd/MM/yyyy HH:mm'}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>NOME</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
+
+    <!-- Age Column -->
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef>IDADE</th>
+      <td mat-cell *matCellDef="let row">{{row.age}}</td>
+    </ng-container>
+
+    <!-- Game Platform Column -->
+    <ng-container matColumnDef="gamePlatform">
+      <th mat-header-cell *matHeaderCellDef>PLATAFORMA</th>
+      <td mat-cell *matCellDef="let row">{{row.gamePlatform}}</td>
+    </ng-container>
+
+    <!-- Genre Name Column -->
+    <ng-container matColumnDef="genreName">
+      <th mat-header-cell *matHeaderCellDef>GÊNERO</th>
+      <td mat-cell *matCellDef="let row">{{row.genreName}}</td>
+    </ng-container>
+
+    <!-- Game Title Column -->
+    <ng-container matColumnDef="gameTitle">
+      <th mat-header-cell *matHeaderCellDef>TÍTULO DO GAME</th>
+      <td mat-cell *matCellDef="let row">{{row.gameTitle}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<br>
+<div fxLayout="row" fxLayoutAlign="center" class="button-group">
+  <div fxLayout="row wrap" fxFlex="80" fxLayoutAlign="center" fxLayoutGap="5">
+    <button
+		*ngFor="let i of this.pages"
+		mat-mini-fab color="primary"
+		[disabled]="i == this.currentPage"
+		(click)="getPage(i)"
+	>
+		{{i + 1}}
+	</button>
+  </div>
+</div> 
+<br>

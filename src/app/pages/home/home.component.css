@@ -1,0 +1,24 @@
+article {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	height: 90%;
+}
+
+.left-section {
+	display: flex;
+	flex-direction: column;
+	
+	width: 400px;
+	/* height: 100%; */
+}
+
+.left-section > button {
+	margin-top: 50px;
+	align-self: flex-start;
+}
+
+img {
+	width: 400px;
+}

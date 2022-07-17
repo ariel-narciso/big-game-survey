@@ -1,0 +1,20 @@
+<mat-card>
+	<mat-card-title>Gênero</mat-card-title>
+	<mat-card-content>
+		<ngx-charts-pie-chart
+			*ngIf="this.totalRecords"
+			fxFlex="100"
+			[scheme]="this.colorScheme"
+			[results]="this.dataCharByGenre"
+			[gradient]="gradient"
+			[legend]="showLegend"
+			[legendPosition]="legendPosition"
+			[labels]="showLabels"
+			[doughnut]="isDoughnut"
+		>
+		<ng-template #tooltipTemplate let-model="model">
+			{{model.name}} - {{model.value / this.totalRecords | percent: '1.1-1':'en-US'}}
+		</ng-template>
+		</ngx-charts-pie-chart>
+	</mat-card-content>
+</mat-card>
