@@ -39,6 +39,9 @@ export class PlatformComponent implements OnInit {
       mp.forEach((value, name) => {
         this.dataChartByPlatform.push({name, value});
       });
+      this.dataChartByPlatform.sort((a, b) => {
+        return b.value - a.value;
+      })
     });
   }
 
