@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -15,6 +15,8 @@ import { MostVotedComponent } from './components/most-voted/most-voted.component
 import { PlatformComponent } from './components/platform/platform.component';
 import { ButtonNavigateComponent } from './components/button-navigate/button-navigate.component';
 import { GenreComponent } from './components/genre/genre.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { GenreComponent } from './components/genre/genre.component';
     MostVotedComponent,
     PlatformComponent,
     ButtonNavigateComponent,
-    GenreComponent
+    GenreComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,13 @@ import { GenreComponent } from './components/genre/genre.component';
     HttpClientModule,
     FlexLayoutModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
