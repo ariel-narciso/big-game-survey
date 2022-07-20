@@ -1,0 +1,9 @@
+{
+	"/api": {
+		"target": "https://sds1-tyandrer.herokuapp.com",
+		"secure": true,
+		"pathRewrite": {
+			"^/api": ""
+		  }
+	}
+}
